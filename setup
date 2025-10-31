@@ -31,9 +31,6 @@ docker volume create \
   --opt device=/data/system \
   mastadon_system
 
-echo "Pull images"
-docker compose pull
-
 echo "Generate DB Password"
 DB_PWD=$(cat /dev/urandom | tr -dc "a-zA-Z0-9" | fold -w 50 | head -n 1)
 
@@ -75,5 +72,8 @@ REDIS_PASSWORD=
 EOM
 
 echo "DB Password: $DB_PWD"
+
+#echo "Pull images"
+#docker compose pull
 
 #docker compose run --rm web bundle exec rake mastodon:setup
