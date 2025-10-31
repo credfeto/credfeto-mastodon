@@ -62,3 +62,5 @@ REDIS_PASSWORD=
 EOM
 
 echo "DB Password: $DB_PWD"
+
+docker compose run --rm web bundle exec rake mastodon:setup
