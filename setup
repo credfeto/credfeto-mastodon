@@ -1,1 +1,26 @@
 #! /bin/sh
+
+
+mkdir -p /data/db
+mkdir -p /data/redis
+mkdir -p /data/system
+
+sudo docker volume create \
+  --opt type=none \
+  --opt o=bind \
+  --opt device=/data/db \
+  mastadon_db
+
+sudo docker volume create \
+  --opt type=none \
+  --opt o=bind \
+  --opt device=/data/nginx \
+  mastadon_redis
+
+sudo docker volume create \
+  --opt type=none \
+  --opt o=bind \
+  --opt device=/data/system \
+  mastadon_system
+
+docker compose pull
