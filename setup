@@ -40,7 +40,7 @@ docker container rm db -f
 docker container run --rm --name db \
             -v mastadon_db:/var/lib/postgresql/data \
             -e "POSTGRES_PASSWORD=$DB_PWD" \
-            1-d postgres:14-alpine
+            -d postgres:14-alpine
 
 READY=1
 while [ $READY != 0 ]
