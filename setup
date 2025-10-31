@@ -78,4 +78,4 @@ echo "DB Password: $DB_PWD"
 #echo "Pull images"
 #docker compose pull
 
-#docker compose run --rm web bundle exec rake mastodon:setup
+docker compose run --rm web bundle exec rake mastodon:setup
