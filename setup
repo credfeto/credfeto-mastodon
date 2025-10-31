@@ -43,6 +43,12 @@ docker run --rm --name db \
 -e "POSTGRES_PASSWORD=$DB_PWD" \
 -d postgres:14-alpine
 
+echo "Waiting for DB"
+sleep 30
+
+docker exec -it db pg_isready -U postgres
+echo "Ready: $?"
+
 echo "Start Create DB User"
 docker exec -it db psql -U postgres -c "CREATE USER mastodon WITH PASSWORD '$DB_PWD' CREATEDB;"
 
