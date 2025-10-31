@@ -35,7 +35,8 @@ echo "Generate DB Password"
 DB_PWD=$(cat /dev/urandom | tr -dc "a-zA-Z0-9" | fold -w 50 | head -n 1)
 
 echo "Start DB"
-docker stop db
+docker container stop db
+docker container rm db -f
 docker run --rm --name db \
 -v mastadon_db:/var/lib/postgresql/data \
 -e "POSTGRES_PASSWORD=$DB_PWD" \
@@ -57,7 +58,7 @@ done
 #docker exec -it db psql -U postgres -c "CREATE USER mastodon WITH PASSWORD '$DB_PWD' CREATEDB;"
 
 echo "Stop DB"
-docker stop db
+docker container stop db
 
 echo "Create Minimal .env.production"
 cat << EOM > .env.production
