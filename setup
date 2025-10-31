@@ -81,4 +81,4 @@ echo "DB Password: $DB_PWD"
 echo "Run setup"
 docker compose run --rm web bundle exec rake mastodon:setup
 
-docker compose run --rm web db:encryption:init
+echo "**** remember to put the variables into .env.production"
