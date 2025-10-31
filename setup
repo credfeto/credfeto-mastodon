@@ -42,7 +42,7 @@ docker run --rm --name db \
 -d postgres:14-alpine
 
 READY=1
-while $READY != 0
+while $READY
 do
   echo "Waiting for DB"...
   sleep 5
