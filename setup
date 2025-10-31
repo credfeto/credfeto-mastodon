@@ -12,19 +12,19 @@ mkdir -p /data/db
 mkdir -p /data/redis
 mkdir -p /data/system
 
-sudo docker volume create \
+docker volume create \
   --opt type=none \
   --opt o=bind \
   --opt device=/data/db \
   mastadon_db
 
-sudo docker volume create \
+docker volume create \
   --opt type=none \
   --opt o=bind \
   --opt device=/data/nginx \
   mastadon_redis
 
-sudo docker volume create \
+docker volume create \
   --opt type=none \
   --opt o=bind \
   --opt device=/data/system \
@@ -35,7 +35,7 @@ docker compose pull
 DB_PWD=$(cat /dev/urandom | tr -dc "a-zA-Z0-9" | fold -w 50 | head -n 1)
 
 docker run --rm --name db \
--v <volume path>:/var/lib/postgresql/data \
+-v mastadon_db:/var/lib/postgresql/data \
 -e "POSTGRES_PASSWORD=$DB_PWD" \
 -d postgres:14-alpine
 
