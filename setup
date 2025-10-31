@@ -43,8 +43,12 @@ docker run --rm --name db \
 -e "POSTGRES_PASSWORD=$DB_PWD" \
 -d postgres:14-alpine
 
-echo "Waiting for DB"
-sleep 30
+do
+  echo "Waiting for DB"...
+  sleep 5
+  docker exec -it db pg_isready -U postgres
+  READY=$?
+while $READY != 0;
 
 #docker exec -it db pg_isready -U postgres
 #echo "Ready: $?"
@@ -52,8 +56,8 @@ sleep 30
 #echo "Start Create DB User"
 #docker exec -it db psql -U postgres -c "CREATE USER mastodon WITH PASSWORD '$DB_PWD' CREATEDB;"
 
-#echo "Stop DB"
-#docker stop db
+echo "Stop DB"
+docker stop db
 
 echo "Create Minimal .env.production"
 cat << EOM > .env.production
