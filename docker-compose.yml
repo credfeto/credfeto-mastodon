@@ -166,7 +166,6 @@ services:
     image: cloudflare/cloudflared:latest
     container_name: cloudflare
     restart: always
-    env_file: .env.cloudflare
     command: tunnel --no-autoupdate run --token ${CLOUDFLARE_TUNNEL_TOKEN}
     depends_on:
       nginx:
