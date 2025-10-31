@@ -172,6 +172,15 @@ services:
           condition: service_started
           #condition: service_healthy
 
+  watchtower:
+    image: containrrr/watchtower
+    container_name: watchtower
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    restart: always
+    environment:
+      WATCHTOWER_POLL_INTERVAL: 3600
+
 networks:
   external_network:
   internal_network:
