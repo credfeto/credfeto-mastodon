@@ -155,7 +155,8 @@ services:
       - web
       - streaming
     volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf   
+      - ./certs:/etc/nginx/ssl:r
+      - ./nginx.conf:/etc/nginx/nginx.conf
     networks:
       - external_network
       - internal_network
