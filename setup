@@ -1,6 +1,13 @@
 #! /bin/sh
 
 
+docker compose stop
+docker compose rm -f
+
+[ -d /data/db ] && rm -fr /data/db
+[ -d /data/redis ] && rm -fr /data/redis
+[ -d /data/system ] && rm -fr /data/system
+
 mkdir -p /data/db
 mkdir -p /data/redis
 mkdir -p /data/system
@@ -24,3 +31,29 @@ sudo docker volume create \
   mastadon_system
 
 docker compose pull
+
+DB_PWD=$(cat /dev/urandom | tr -dc "a-zA-Z0-9" | fold -w 50 | head -n 1)
+
+docker run --rm --name db \
+-v <volume path>:/var/lib/postgresql/data \
+-e "POSTGRES_PASSWORD=$DB_PWD" \
+-d postgres:14-alpine
+
+{
+  echo "CREATE USER mastodon WITH PASSWORD '$DB_PWD' CREATEDB;"
+  echo "exit"
+} | docker exec -it db psql -U postgres
+
+docker stop db
+
+cat << EOM > .env.production
+DB_HOST=db
+DB_PORT=5432
+DB_NAME=mastodon
+DB_USER=mastodon
+DB_PASS=$DB_PWD
+REDIS_HOST=redis
+REDIS_PORT=6379
+REDIS_PASSWORD=
+EOM
+
