@@ -170,8 +170,8 @@ services:
     env_file: .env.cloudflare
     depends_on:
       nginx:
-          #        condition: service_started
-          condition: service_healthy
+          condition: service_started
+          #condition: service_healthy
 
 networks:
   external_network:
