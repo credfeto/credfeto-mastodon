@@ -46,14 +46,14 @@ docker run --rm --name db \
 echo "Waiting for DB"
 sleep 30
 
-docker exec -it db pg_isready -U postgres
-echo "Ready: $?"
+#docker exec -it db pg_isready -U postgres
+#echo "Ready: $?"
 
-echo "Start Create DB User"
-docker exec -it db psql -U postgres -c "CREATE USER mastodon WITH PASSWORD '$DB_PWD' CREATEDB;"
+#echo "Start Create DB User"
+#docker exec -it db psql -U postgres -c "CREATE USER mastodon WITH PASSWORD '$DB_PWD' CREATEDB;"
 
-echo "Stop DB"
-docker stop db
+#echo "Stop DB"
+#docker stop db
 
 echo "Create Minimal .env.production"
 cat << EOM > .env.production
@@ -69,4 +69,4 @@ EOM
 
 echo "DB Password: $DB_PWD"
 
-docker compose run --rm web bundle exec rake mastodon:setup
+#docker compose run --rm web bundle exec rake mastodon:setup
