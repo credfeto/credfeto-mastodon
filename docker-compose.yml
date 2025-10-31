@@ -149,6 +149,8 @@ services:
     hostname: nginx
     image: nginx:stable-alpine
     restart: always
+    ports:
+      - "80:80"
     depends_on:
       - web
       - streaming
