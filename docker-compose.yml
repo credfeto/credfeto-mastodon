@@ -172,8 +172,8 @@ services:
     command: tunnel --no-autoupdate run --token ${CLOUDFLARE_TUNNEL_TOKEN}
     depends_on:
       nginx:
-          condition: service_started
-          #condition: service_healthy
+          #condition: service_started
+          condition: service_healthy
 
   watchtower:
     image: containrrr/watchtower
