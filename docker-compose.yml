@@ -171,8 +171,7 @@ services:
     restart: always
     command: tunnel --no-autoupdate run --token ${CLOUDFLARE_TUNNEL_TOKEN}
     healthcheck:
-      test:
-        tunnel --metrics 192.168.150.12:443 ready || exit 1
+      test:  ["CMD", "cloudflared", "tunnel", "--metrics", "localhost:80", "ready"]
     depends_on:
       nginx:
           #condition: service_started
