@@ -170,6 +170,9 @@ services:
     container_name: cloudflare
     restart: always
     command: tunnel --no-autoupdate run --token ${CLOUDFLARE_TUNNEL_TOKEN}
+    healthcheck:
+      test:
+        tunnel --metrics 192.168.150.12:443 ready || exit 1
     depends_on:
       nginx:
           #condition: service_started
