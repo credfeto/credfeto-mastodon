@@ -152,6 +152,9 @@ services:
     ports:
       - "80:80"
       - "443:443"
+    healthcheck:
+      # prettier-ignore
+      test: [ 'CMD-SHELL', "curl -s http://localhost/health || exit 1" ]
     depends_on:
       - web
       - streaming
