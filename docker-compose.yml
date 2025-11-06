@@ -65,7 +65,7 @@ services:
     # build: .
     container_name: web
     hostname: web
-    image: ghcr.io/mastodon/mastodon:v4.4.8
+    image: ghcr.io/mastodon/mastodon:latest
     restart: always
     env_file: .env.production
     command: bundle exec puma -C config/puma.rb
@@ -91,7 +91,7 @@ services:
     #   context: .
     container_name: streaming
     hostname: streaming
-    image: ghcr.io/mastodon/mastodon-streaming:v4.4.8
+    image: ghcr.io/mastodon/mastodon-streaming:latest
     restart: always
     env_file: .env.production
     command: node ./streaming/index.js
@@ -112,7 +112,7 @@ services:
     # build: .
     container_name: sidekiq
     hostname: sidekiq
-    image: ghcr.io/mastodon/mastodon:v4.4.8
+    image: ghcr.io/mastodon/mastodon:latest
     restart: always
     env_file: .env.production
     command: bundle exec sidekiq
