@@ -169,7 +169,7 @@ services:
     image: cloudflare/cloudflared:latest
     container_name: cloudflare
     restart: always
-    command: tunnel --no-autoupdate run --token ${CLOUDFLARE_TUNNEL_TOKEN}
+    command: tunnel --no-autoupdate run --token $CLOUDFLARE_TUNNEL_TOKEN
     #healthcheck:
     #  test:  ["CMD", "cloudflared", "tunnel", "--metrics", "localhost:80", "ready"]
     depends_on:
