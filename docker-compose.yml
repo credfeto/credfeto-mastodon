@@ -165,17 +165,17 @@ services:
       - external_network
       - internal_network
 
-  cloudflare:
-    image: cloudflare/cloudflared:latest
-    container_name: cloudflare
-    restart: always
-    command: tunnel --no-autoupdate run --token $CLOUDFLARE_TUNNEL_TOKEN
-    #healthcheck:
-    #  test:  ["CMD", "cloudflared", "tunnel", "--metrics", "localhost:80", "ready"]
-    depends_on:
-      nginx:
-          #condition: service_started
-          condition: service_healthy
+#  cloudflare:
+#    image: cloudflare/cloudflared:latest
+#    container_name: cloudflare
+#    restart: always
+#    command: tunnel --no-autoupdate run --token $CLOUDFLARE_TUNNEL_TOKEN
+#    #healthcheck:
+#    #  test:  ["CMD", "cloudflared", "tunnel", "--metrics", "localhost:80", "ready"]
+#    depends_on:
+#      nginx:
+#          #condition: service_started
+#          condition: service_healthy
 
   watchtower:
     image: nickfedor/watchtower:latest
